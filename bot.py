@@ -26,7 +26,7 @@ def contact(bot, update):
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
 def convert_image(bot,update):
-	photo_file = bot.get_file(update.message.photo[-1].file_id)
+    photo_file = bot.get_file(update.message.photo[-1].file_id)
     photo_file.download('testing.jpg')
     try:
         output=pytesseract.image_to_string(Image.open('testing.jpg'))
