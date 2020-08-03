@@ -10,8 +10,8 @@ import cloudmersive_ocr_api_client
 from cloudmersive_ocr_api_client.rest import ApiException
 
 configuration = cloudmersive_ocr_api_client.Configuration()
-API_KEY=os.environ.get("CLOUDMERSIVE_API","")
-configuration.api_key['Apikey'] = 'API_KEY'
+#API_KEY=os.environ.get("CLOUDMERSIVE_API","")
+configuration.api_key['Apikey'] = 'b89dee15-4e06-4509-89e0-82a68bb57ed7'
 api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
 
 # Enable logging
