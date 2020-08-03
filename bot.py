@@ -30,7 +30,7 @@ def contact(update,context):
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
 def convert_image(update,context):
-    photo_file = bot.get_file(update.message.photo[-1].file_id)
+    photo_file = (update.message.photo[-1].file_id)
     image_file=photo_file.download('testing.jpg')
     update.message.reply_text("Yeah!,I got your image let me process it")
 
