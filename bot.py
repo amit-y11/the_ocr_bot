@@ -30,7 +30,7 @@ def contact(bot, update):
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
 def convert_image(bot,update):
-	photo_file = bot.get_file(update.message.photo[-1].file_id)
+    photo_file = bot.get_file(update.message.photo[-1].file_id)
     image_file=photo_file.download('testing.jpg')
 
     try:
@@ -46,15 +46,15 @@ def convert_image(bot,update):
             pass
 	
 def main():
-	ocr_bot_token=os.environ.get("BOT_TOKEN", "")
+    ocr_bot_token=os.environ.get("BOT_TOKEN", "")
     updater = Updater(ocr_bot_token)
-	dp=updater.dispatcher
-	dp.add_handler(CommandHandler('start',start))
-	dp.add_handler(CommandHandler('contact', contact))
-	dp.add_handler(MessageHandler(Filters.photo,convert_image))
-	dp.add_error_handler(error)
-	updater.start_polling()
-	updater.idle()
+    dp=updater.dispatcher
+    dp.add_handler(CommandHandler('start',start))
+    dp.add_handler(CommandHandler('contact', contact))
+    dp.add_handler(MessageHandler(Filters.photo,convert_image))
+    dp.add_error_handler(error)
+    updater.start_polling()
+    updater.idle()
 
 def error(bot, update, error):
     """Log Errors caused by Updates."""
