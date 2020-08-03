@@ -3,6 +3,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 from telegram import Update, Bot, ParseMode
 import os
+import json
 
 #using cloudmersive api
 import cloudmersive_ocr_api_client
