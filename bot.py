@@ -36,7 +36,7 @@ def convert_image(update,context):
 
     try:
         # Convert a photo of a document into text
-        api_response = api_instance.image_ocr_photo_to_text(image_file)
+        api_response = api_instance.image_ocr_post(image_file)
         confidence=api_response.mean_confidence_level
         update.message.reply_text("Confidence level "+str(confidence)+" \nExtracted text:"+api_response.text_result)
     except ApiException as e:
