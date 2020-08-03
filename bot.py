@@ -21,17 +21,18 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
-def start(bot, update):
+def start(update,context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
-def contact(bot, update):
+def contact(update,context):
     """Send a message when the command /contact is issued."""
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
-def convert_image(bot,update):
+def convert_image(update,context):
     photo_file = bot.get_file(update.message.photo[-1].file_id)
     image_file=photo_file.download('testing.jpg')
+    update.message.reply_text("Yeah!,I got your image let me process it")
 
     try:
         # Convert a photo of a document into text
@@ -47,7 +48,7 @@ def convert_image(bot,update):
 	
 def main():
     ocr_bot_token=os.environ.get("BOT_TOKEN", "")
-    updater = Updater(ocr_bot_token)
+    updater = Updater(ocr_bot_token,use_context=True)
     dp=updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('contact', contact))
