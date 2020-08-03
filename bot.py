@@ -35,8 +35,8 @@ def convert_image(update,context):
     update.message.reply_text("Yeah!,I got your image let me process it")
     
     configuration = cloudmersive_ocr_api_client.Configuration()
-    API_KEY=os.environ.get("CLOUDMERSIVE_API","")
-    configuration.api_key['Apikey'] = 'API_KEY'
+    #API_KEY=os.environ.get("CLOUDMERSIVE_API","")
+    configuration.api_key['Apikey'] = 'd299e28a-d782-4deb-aa11-a3989c4fff19'
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
     try:
         # Convert a photo of a document into text
