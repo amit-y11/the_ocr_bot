@@ -30,13 +30,15 @@ def contact(update,context):
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
 def convert_image(update,context):
-    photo_file = (update.message.photo[-1].file_id)
-    image_file=photo_file.download('testing.jpg')
+    filename="test.jpg"
+    file_id = update.message.photo[-1].file_id
+    newFile=context.bot.get_file(file_id)
+    newFile.download(filename)
     update.message.reply_text("Yeah!,I got your image let me process it")
 
     try:
         # Convert a photo of a document into text
-        api_response = api_instance.image_ocr_post(image_file)
+        api_response = api_instance.image_ocr_post(filename)
         confidence=api_response.mean_confidence_level
         print(api_response)
         update.message.reply_text("Confidence level "+str(confidence)+" \nExtracted text:"+api_response.text_result)
