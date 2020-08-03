@@ -9,10 +9,7 @@ import json
 import cloudmersive_ocr_api_client
 from cloudmersive_ocr_api_client.rest import ApiException
 
-configuration = cloudmersive_ocr_api_client.Configuration()
-#API_KEY=os.environ.get("CLOUDMERSIVE_API","")
-configuration.api_key['Apikey'] = 'b89dee15-4e06-4509-89e0-82a68bb57ed7'
-api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
+
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -36,7 +33,11 @@ def convert_image(update,context):
     newFile=context.bot.get_file(file_id)
     newFile.download(filename)
     update.message.reply_text("Yeah!,I got your image let me process it")
-
+    
+    configuration = cloudmersive_ocr_api_client.Configuration()
+    API_KEY=os.environ.get("CLOUDMERSIVE_API","")
+    configuration.api_key['Apikey'] = 'API_KEY'
+    api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
     try:
         # Convert a photo of a document into text
         api_response = api_instance.image_ocr_post(filename)
