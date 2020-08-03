@@ -40,7 +40,7 @@ def convert_image(update,context):
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
     try:
         # Convert a photo of a document into text
-        api_response = api_instance.image_ocr_post(filename, recognition_mode='Basic')
+        api_response = api_instance.image_ocr_post(filename)
         print(api_response)
         confidence=api_response.mean_confidence_level
         update.message.reply_text("Confidence level "+str(confidence)+" \nExtracted text:\n"+api_response.text_result)
