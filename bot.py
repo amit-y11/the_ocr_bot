@@ -43,7 +43,7 @@ def convert_image(update,context):
         api_response = api_instance.image_ocr_post(filename)
         confidence=api_response.mean_confidence_level
         print(api_response)
-        update.message.reply_text("Confidence level "+str(confidence)+" \nExtracted text:"+api_response.text_result)
+        update.message.reply_text("Confidence level "+str(confidence)+" \nExtracted text:\n"+api_response.text_result)
     except ApiException as e:
         update.message.reply_text("Exception when calling ImageOcrApi->image_ocr_photo_to_text: %s\n" % e)
         try:
