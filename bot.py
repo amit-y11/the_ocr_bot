@@ -1,4 +1,3 @@
-import config
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
@@ -36,8 +35,8 @@ def convert_image(update,context):
     update.message.reply_text("Yeah!,I got your image let me process it")
     
     configuration = cloudmersive_ocr_api_client.Configuration()
-    #API_KEY=os.environ.get("CLOUDMERSIVE_API","")
-    configuration.api_key['Apikey'] = config.api_key
+    
+    configuration.api_key['Apikey'] = os.environ.get("CLOUDMERSIVE_API","")
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
     try:
         # Convert a photo of a document into text
@@ -53,8 +52,7 @@ def convert_image(update,context):
             pass
 	
 def main():
-    #ocr_bot_token=os.environ.get("BOT_TOKEN", "")
-    ocr_bot_token=config.bot_token
+    ocr_bot_token=os.environ.get("BOT_TOKEN", "")
     updater = Updater(ocr_bot_token,use_context=True)
     dp=updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
