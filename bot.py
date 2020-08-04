@@ -33,15 +33,15 @@ logger = logging.getLogger(__name__)
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
 @send_typing_action
-time.sleep(1)
 def start(update,context):
     """Send a message when the command /start is issued."""
+    time.sleep(1)
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
 @send_typing_action
-time.sleep(1)
 def contact(update,context):
     """Send a message when the command /contact is issued."""
+    time.sleep(1)
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
 @send_typing_action
