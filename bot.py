@@ -1,4 +1,4 @@
-import telegram
+from telegram import ChatAction
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
