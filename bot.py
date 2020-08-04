@@ -50,7 +50,6 @@ def convert_image(update,context):
     file_id = update.message.photo[-1].file_id
     newFile=context.bot.get_file(file_id)
     newFile.download(filename)
-    @send_typing_action
     time.sleep(1)
     update.message.reply_text("Yeah!,I got your image let me process it")
     
@@ -63,7 +62,6 @@ def convert_image(update,context):
         api_response = api_instance.image_ocr_post(filename)
         print(api_response)
         confidence=api_response.mean_confidence_level
-        @send_typing_action
         time.sleep(2)
         update.message.reply_text("Accuracy : "+str(confidence*100)+"% \nExtracted text:\n")
         update.message.reply_text(api_response.text_result)
