@@ -63,7 +63,6 @@ def convert_image(update,context):
         api_response = api_instance.image_ocr_post(filename)
         print(api_response)
         confidence=api_response.mean_confidence_level
-        time.sleep(2)
         update.message.reply_text("Accuracy : "+str(confidence*100)+"% \nExtracted text:\n")
         update.message.reply_text(api_response.text_result)
     except ApiException as e:
