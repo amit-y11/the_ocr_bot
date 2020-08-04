@@ -7,6 +7,7 @@ import os
 import json
 from functools import wraps
 from time import sleep
+import time
 
 def send_typing_action(func):
     """Sends typing action while processing func command."""
