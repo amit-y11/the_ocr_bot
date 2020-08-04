@@ -6,7 +6,7 @@ from telegram import Update, Bot, ParseMode
 import os
 import json
 from functools import wraps
-import time
+from time import sleep
 
 def send_typing_action(func):
     """Sends typing action while processing func command."""
