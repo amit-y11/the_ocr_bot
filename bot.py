@@ -6,6 +6,7 @@ from telegram import Update, Bot, ParseMode
 import os
 import json
 from functools import wraps
+import time
 
 def send_typing_action(func):
     """Sends typing action while processing func command."""
@@ -32,11 +33,13 @@ logger = logging.getLogger(__name__)
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
 @send_typing_action
+time.sleep(1)
 def start(update,context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
 @send_typing_action
+time.sleep(1)
 def contact(update,context):
     """Send a message when the command /contact is issued."""
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
@@ -47,6 +50,8 @@ def convert_image(update,context):
     file_id = update.message.photo[-1].file_id
     newFile=context.bot.get_file(file_id)
     newFile.download(filename)
+    @send_typing_action
+    time.sleep(1)
     update.message.reply_text("Yeah!,I got your image let me process it")
     
     configuration = cloudmersive_ocr_api_client.Configuration()
@@ -58,6 +63,8 @@ def convert_image(update,context):
         api_response = api_instance.image_ocr_post(filename)
         print(api_response)
         confidence=api_response.mean_confidence_level
+        @send_typing_action
+        time.sleep(2)
         update.message.reply_text("Accuracy : "+str(confidence*100)+"% \nExtracted text:\n")
         update.message.reply_text(api_response.text_result)
     except ApiException as e:
