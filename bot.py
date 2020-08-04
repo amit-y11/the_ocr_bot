@@ -4,6 +4,17 @@ import logging
 from telegram import Update, Bot, ParseMode
 import os
 import json
+from functools import wraps
+
+def send_typing_action(func):
+    """Sends typing action while processing func command."""
+
+    @wraps(func)
+    def command_func(update, context, *args, **kwargs):
+        context.bot.send_chat_action(chat_id=update.effective_message.chat_id, action=ChatAction.TYPING)
+        return func(update, context,  *args, **kwargs)
+
+    return command_func
 
 #using cloudmersive api
 import cloudmersive_ocr_api_client
@@ -19,14 +30,17 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
+@send_typing_action
 def start(update,context):
     """Send a message when the command /start is issued."""
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
+@send_typing_action
 def contact(update,context):
     """Send a message when the command /contact is issued."""
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
+@send_typing_action
 def convert_image(update,context):
     filename="test.jpg"
     file_id = update.message.photo[-1].file_id
