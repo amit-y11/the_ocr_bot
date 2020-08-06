@@ -45,6 +45,7 @@ def contact(update,context):
     time.sleep(1)
     update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
 
+@run_async
 @send_typing_action
 def convert_image(update,context):
     filename="test.jpg"
@@ -79,13 +80,9 @@ def main():
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('contact', contact))
     dp.add_handler(MessageHandler(Filters.photo, convert_image))
-    dp.add_error_handler(error)
     updater.start_polling()
     updater.idle()
-
-def error(bot, update, error):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, error) 
+ 
 	
 if __name__=="__main__":
 	main()
