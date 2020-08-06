@@ -2,7 +2,6 @@ from telegram import ChatAction
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from telegram import Update, Bot, ParseMode
 import os
 import json
 from functools import wraps
@@ -33,12 +32,14 @@ logger = logging.getLogger(__name__)
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
+@run_async
 @send_typing_action
 def start(update,context):
     """Send a message when the command /start is issued."""
     time.sleep(1)
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
+@run_async
 @send_typing_action
 def contact(update,context):
     """Send a message when the command /contact is issued."""
@@ -48,7 +49,7 @@ def contact(update,context):
 @run_async
 @send_typing_action
 def convert_image(update,context):
-    filename="test.jpg"
+    filename="testing.jpg"
     file_id = update.message.photo[-1].file_id
     newFile=context.bot.get_file(file_id)
     newFile.download(filename)
@@ -64,7 +65,7 @@ def convert_image(update,context):
         api_response = api_instance.image_ocr_post(filename)
         print(api_response)
         confidence=api_response.mean_confidence_level
-        update.message.reply_text("Accuracy : "+str(confidence*100)+"% \nExtracted text:\n")
+        update.message.reply_text("Confidence : "+str(confidence*100)+"% \nExtracted text:\n")
         update.message.reply_text(api_response.text_result)
     except ApiException as e:
         update.message.reply_text("Exception when calling ImageOcrApi->image_ocr_photo_to_text: %s\n" % e)
