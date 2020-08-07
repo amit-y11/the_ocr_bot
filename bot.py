@@ -1,3 +1,4 @@
+import telegram
 from telegram import ChatAction
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -36,15 +37,15 @@ logger = logging.getLogger(__name__)
 @send_typing_action
 def start(update,context):
     """Send a message when the command /start is issued."""
-    time.sleep(1)
+    time.sleep(.500)
     update.message.reply_text('Hi! \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
 
 @run_async
 @send_typing_action
 def contact(update,context):
     """Send a message when the command /contact is issued."""
-    time.sleep(1)
-    update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=ParseMode.MARKDOWN)
+    time.sleep(.500)
+    update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)\nJoin channel : @botsbyamit \nIf you have any question ask on Group : @botsbyamit_support", parse_mode=telegram.ParseMode.MARKDOWN_V2)
 
 @run_async
 @send_typing_action
