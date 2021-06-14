@@ -1,15 +1,16 @@
-import telegram
 from telegram import ChatAction,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters,CallbackQueryHandler
 import logging
 import os
-import json
 from functools import wraps
 
 #using cloudmersive api
 import cloudmersive_ocr_api_client
 from cloudmersive_ocr_api_client.rest import ApiException
+
+api_key = os.environ.get("api_key","")
+token = os.environ.get("bot_token","")
 
 def send_typing_action(func):
     """Sends typing action while processing func command."""
@@ -35,14 +36,7 @@ def start(update,context):
     """Send a message when the command /start is issued."""
     global first
     first=update.message.chat.first_name
-    update.message.reply_text('Hi! '+str(first)+' \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!\nTo get my contact details tap /contact')
-
-@run_async
-@send_typing_action
-def contact(update,context):
-    """Send a message when the command /contact is issued."""
-    update.message.reply_text("Hey! You can find me on \n[Telegram](https://telegram.me/amit_y11)", parse_mode=telegram.ParseMode.MARKDOWN)
-    update.message.reply_text("Join channel : @botsbyamit \nIf you have any questions ask on Group : @botsbyamit_support")
+    update.message.reply_text('Hi! '+str(first)+' \n\nWelcome to Optical Character Recognizer Bot. \n\nJust send a clear image to me and i will recognize the text in the image and send it as a message!')
 
 @run_async
 @send_typing_action
@@ -79,7 +73,8 @@ def button(update, context):
 
     configuration = cloudmersive_ocr_api_client.Configuration()
     #Enter Your cloudmersive api key in place of  os.environ.get(...........)
-    configuration.api_key['Apikey'] = os.environ.get("CLOUDMERSIVE_API","")
+    #Example >> configuration.api_key['Apikey'] = "axscaerefcasdfsdfasdf"
+    configuration.api_key['Apikey'] = api_key
     api_instance = cloudmersive_ocr_api_client.ImageOcrApi(cloudmersive_ocr_api_client.ApiClient(configuration))
     try:
         lang=query.data
@@ -93,22 +88,15 @@ def button(update, context):
             os.remove('testing.jpg')
         except Exception:
             pass
-    return button
-    
-def donate(update,context):
-    update.message.reply_text("You can support me by donating any amount you wish to me using the following *Payment Options*: \n\n[Paypal](https://paypal.me/yamit11) \nUPI : `amity11@kotak` \n[Debit/Credit/Other wallets](https://rzp.io/l/amity11)\n\nDon't forget to send a screenshot of the transaction to @amit_y11",parse_mode=ParseMode.MARKDOWN)
-    return donate
-	
+    	
 def main(): 
-    bot_token=os.environ.get("BOT_TOKEN", "")
+    bot_token=token
     updater = Updater(bot_token,use_context=True)
     dp=updater.dispatcher
     dp.add_handler(CommandHandler('start',start))
-    dp.add_handler(CommandHandler('contact', contact))
-    dp.add_handler(CommandHandler('donate', donate))
     dp.add_handler(MessageHandler(Filters.photo, convert_image))
     dp.add_handler(CallbackQueryHandler(button))
-    updater.start_polling()
+    updater.start_polling(clean=True)
     updater.idle()
  
 	
