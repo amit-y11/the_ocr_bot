@@ -17,7 +17,7 @@ Start chat with this bot on [telegram](https://telegram.me/the_ocr_bot)
 
 * Bot token from [Bot Father](https://t.me/BotFather), If you don't know how to get bot token, read [this](https://core.telegram.org/bots#6-botfather)
 
-* Cloudmersive OCR api key, get your api key from [here](https://account.cloudmersive.com/signup)
+* OCR api key, get your api key from [here](https://ocr.space/ocrapi)
 
 ---
 ## Installation 
@@ -36,9 +36,9 @@ $ git clone https://github.com/amit-y11/the_ocr_bot
 ```sh
 $ pip3 install -r requirements.txt
 ```
-* Edit line 12 and paste your cloudmersive api key
+* Edit line 12 and paste your ocr api key
 ```sh
-12        api_key = "Your Api key from Cloudmersive"
+12        api_key = "Your Api key from https://ocr.space/ocrapi"
 ```
 * Edit line 13 and paste your Bot token
 ```sh

@@ -15,7 +15,7 @@
             "required":"True"
         },
         "api_key":{
-            "description":"Api key from cloudmersive.com",
+            "description":"Api key from https://ocr.space/ocrapi",
             "required":"True"
         }
     }
