@@ -8,7 +8,7 @@
 
 ## About
 
-You can send an image containing text to this bot and it will respond quickly with the extracted in the picture!
+You can send an image containing text to this bot and it will respond quickly with the extracted text from the picture!
 
 Start chat with this bot on [telegram](https://telegram.me/the_ocr_bot)
 
