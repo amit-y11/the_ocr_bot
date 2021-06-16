@@ -34,6 +34,7 @@ $ git clone https://github.com/amit-y11/the_ocr_bot
 ```
 * Enter the directory and install all the requirements using
 ```sh
+$ cd the_ocr_bot
 $ pip3 install -r requirements.txt
 ```
 * Edit line 12 and paste your ocr api key
