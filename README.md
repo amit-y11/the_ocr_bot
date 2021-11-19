@@ -47,5 +47,5 @@ BOT_TOKEN = "Your Bot Token"
 
 #### Run Your Bot using the following command :
 ```sh
-$  python3 bot.py
+python3 bot.py
 ```
