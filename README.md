@@ -30,21 +30,21 @@ OR
 
 * Clone this repository using
 ```sh
-$ git clone https://github.com/amit-y11/the_ocr_bot
+git clone https://github.com/amit-y11/the_ocr_bot
 ```
 * Enter the directory and install all the requirements using
 ```sh
-$ cd the_ocr_bot
-$ pip3 install -r requirements.txt
+cd the_ocr_bot
 ```
-* Edit line 12 and paste your ocr api key
 ```sh
-12        api_key = "Your Api key from https://ocr.space/ocrapi"
+pip3 install -r requirements.txt
 ```
-* Edit line 13 and paste your Bot token
+* Make a .env file and paste your API_KEY and BOT_TOKEN
 ```sh
-13       token="Your Bot Token"
+API_KEY = "Your Api key from https://ocr.space/ocrapi"
+BOT_TOKEN = "Your Bot Token"
 ```
+
 #### Run Your Bot using the following command :
 ```sh
 $  python3 bot.py

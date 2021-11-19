@@ -10,11 +10,11 @@
     ],
     "repository": "https://github.com/amit-y11/the_ocr_bot",
     "env":{
-        "bot_token":{
+        "BOT_TOKEN":{
             "description":"Telegram bot token",
             "required":"True"
         },
-        "api_key":{
+        "API_KEY":{
             "description":"Api key from https://ocr.space/ocrapi",
             "required":"True"
         }
